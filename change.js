@@ -28,7 +28,7 @@ $("#btnSm").click(function(){
         row.USERID === inputStaff && row.PW === inputId
       );
       if (found) {
-        alert(111);
+        //alert(111);
        fetch("https://script.google.com/macros/s/AKfycbz4vuSyMLfRpfcmwvaT-QvWBbedtznTKuv3t2LQvQc3btcVI37otF8sS7XlX1kSKW_TEA/exec", {
   method: "POST",
   headers: {
@@ -40,6 +40,10 @@ $("#btnSm").click(function(){
     "PW": pwnew
   })
 })
+
+$("#txtPwOld").val('');
+$("#txtPwNew1").val('');
+$("#txtPwNew2").val('');
  alert("✅Cập nhập thành công.");
         
       } else {
