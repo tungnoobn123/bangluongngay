@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bảng lương</title>
+</head>
+<style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+            table th {
+                background-color: #F7F7F7;
+                color: #333;
+                font-weight: bold;
+            }
+
+            table th, table td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+    </style>
+<body>
+  <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!--<input type="button" id="btnExport" value="Export pdf" />-->
+                <button type="button" id="btnExportpdf">EXPORT PDF</button>
+                <button type="button" id="btnExport" onclick="exportReportToExcel(this)">EXPORT EXCEL</button>
+                <br />
+                <br />
+                <table id="tblCustomers" class="table table-bordered">
+                    <tr>
+                        <th colspan="2" id="Fdate">Bảng Lương </th>
+                        <th>Số thẻ</th>
+                        <th id="StaffNo"></th>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Bộ phận 部门</td>
+                        <td id="dpt" style="font-weight:bold">IT</td>
+                        <td style="font-weight:bold">Họ và tên 姓名</td>
+                        <td id="Name" style="font-weight:bold">Hoàng Đắc Tùng</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Bậc lương mới 新的级别</td>
+                        <td style="font-weight:bold" id="SalaryGrade">0</td>
+                        <td style="font-weight:bold">Tiền Lương 薪资（1）</td>
+                        <td id="DaySalary" style="font-weight:bold">0</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">Lương cơ bản 基本工资</td>
+                        <td id="FactBasicSalary">10</td>
+                        <td>Lương ca ngày 白班工资</td>
+                        <td id="DaySalary1">0</td>
+                    </tr>
+                    <tr>
+                        <td>Trợ cấp xăng xe</td>
+                        <td id="tcxx">0</td>
+                        <td>Lương ca đêm 夜班工资</td>
+                        <td id="NightSalary">0</td>
+                    </tr>
+                    <tr>
+                        <td>Trợ cấp Cương vị 岗位贴 <strong>(a)</strong></td>
+                        <td id="StationSalaryVN">10</td>
+                        <td colspan="2">Lương ngừng việc</td>
+                    </tr>
+                    <tr>
+                        <td>Trợ cấp điện thoại</td>
+                        <td id="PhoneSalary">0</td>
+                        <td colspan="2" style="font-weight:bold">Giờ tǎng ca 加班时间</td>
+                    </tr>
+                    <tr>
+                        <td>Trợ cấp ngôn ngữ</td>
+                        <td id="LangSalary">0</td>
+                        <td>Tăng ca ngày (150%)白班加班时间 <strong>（h）</strong></td>
+                        <td id="OverWork1">0</td>
+                    </tr>
+                    <tr>
+                        <td>Thâm niên 年资</td>
+                        <td id="YearSalary">0</td>
+                        <td>CN Ngày & Tăng ca đêm <strong>(h)</strong> (200%)周日加班</td>
+                        <td id="cntcd200">0</td>
+                    </tr>
+                    <tr>
+                        <td>Thưởng 奖金类</td>
+                        <td id="txtthuong">0</td>
+                        <td >CN đêm (280%)周日夜班加班 <strong>(h)</strong> </td>
+                        <td id="cndem280"></td>
+                    </tr>
+                    <tr>
+                        <td>Hiệu suất 绩效奖 <strong>(b)</strong> </td>
+                        <td id="BehavePrize">0</td>
+                        <td>Tăng ca ngày lễ tết (300%)节日白班加班 <strong>(h)</strong> </td>
+                        <td id="YeBan">0</td>
+                    </tr>
+                    <tr>
+                        <td>Hiệu suất khác 其他绩效 <strong>(c)</strong></td>
+                        <td id="hieusuatkhac">0</td>
+                        <td>Tăng ca đêm lễ tét (390%)节日夜班加班 <strong>(h)</strong> </td>
+                        <td id="wuban">0</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; text-decoration: underline;">Tổng lương 总工资</td>
+                        <td id="DaySalary2">0</td>
+                        <td style="font-weight:bold">Tiền tǎng ca 加班工资(2)</td>
+                        <td style="font-weight:bold" id="BehavePricevnEx">0</td>
+                    </tr>
+                    <tr>
+                        <td>Nghỉ tự do 旷工 <strong>（h)</strong></td>
+                        <td id="Neglect">0</td>
+                        <td>Điều chỉnh lương (bù/trừ lương, đi muộn, thưởng phạt,Khám sức khỏe…)  <strong>(3)</strong> </td>
+                        <td id="RetrieveSalary">0</td>
+                    </tr>
+                    <tr>
+                        <td>Đi muộn/về sớm 迟到 <strong>(ph)</strong></td>
+                        <td id="LateEarly">0</td>
+                        <td>CD Kinh nguyệt <strong>(4)</strong></td>
+                        <td id="cdkn">0</td>
+                    </tr>
+                    <tr>
+                        <td>Nghỉ việc riêng</td>
+                        <td id="SJ">0</td>
+                        <td>Trợ cấp khác (PCCC, ATVSV, Con nhỏ, SAP, Giới thiệu..) <strong>(5)</strong></td>
+                        <td id="OtherSubsidy">0</td>
+                    </tr>
+                    <tr>
+                        <td>Số ngày nghỉ ốm-TNLD</td>
+                        <td id="BJ">0</td>
+                        <td style="font-weight:bold">TỔNG THU NHẬP总收入(I)= (1)+(2)+(3)+(4)+(5)+(c)</td>
+                        <td style="font-weight:bold" id="ShouldTotal">0</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày nghỉ dưỡng sức / Vợ sinh 无薪假</td>
+                        <td id="PCJ">0</td>
+                        <td>Thuế TNCN个人所得 <strong>(6)</strong></td>
+                        <td id="PersonalTax">0</td>
+                    </tr>
+                    <tr>
+                        <td>Nghỉ phép 年假</td>
+                        <td id="NJ">0</td>
+                        <td>Lương tính BHXH算保险和公会的工资</td>
+                        <td id="BHBasic">0</td>
+                    </tr>
+                    <tr>
+                        <td>Công tác年假</td>
+                        <td id="CC">0</td>
+                        <td>BHXH-8%, BHYT-1.5%, BHTN-1%：社保费 <strong>（7）</strong></td>
+                        <td id="BHPeronalTotal">0</td>
+                    </tr>
+                    <tr>
+                        <td>Số ngày nghỉ được hưởng lương有薪资假</td>
+                        <td id="cjjVN">0</td>
+                        <td>Phí công đoàn 工会费 <strong>(8)</strong></td>
+                        <td id="LaborUnionFeePersonal">0</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold">TỔNG NGÀY CÔNG</td>
+                        <td style="font-weight:bold" id="RealTime">0</td>
+                        <td>Khấu trừ khác 其他扣除(Hoàn Thuế TNCP 2024)</td>
+                        <td id="khautrukhac">0</td>
+                    </tr>
+                    <tr>
+                        <td>Ca ngày 白班上班天数</td>
+                        <td id="RealTimeDay">0</td>
+                        <td style="font-weight:bold">TỔNG KHẤU TRỪ扣款合计(II)=(6)+(7)+(8)</td>
+                        <td id="DeductionsTotal">0</td>
+                    </tr>
+                    <tr>
+                        <td>Ca đêm 夜班上班天数</td>
+                        <td id="RealTimeNight">0</td>
+                        <td style="font-weight:bold"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Nghỉ ngừng việc 因公放假</td>
+                        <td id="nghi70">0</td>
+                        <td style="font-weight:bold">THỰC LĨNH 实发工资(III)=(I)-(II)</td>
+                        <td style="font-weight:bold" id="FactTotal">0</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="font-weight:bold;font-size:20px;text-align:center">
+                            Công ty TNHH Blueway Vina xin chân thành cảm ơn sự nỗ lực của bạn!
+                            <br>
+                            (Lưu ý: Không cấp lại phiếu lương vì bất kỳ lý do nào)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+     <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script type="text/javascript" src="App.js"></script>
+  <script>
+    
+  </script>
+</body>
+</html>
