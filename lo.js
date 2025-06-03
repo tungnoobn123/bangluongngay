@@ -4,14 +4,14 @@ const sheetId = "1yxtqSjrgVBa3dgk3to9ytc9F5J3-nWehXjgQdOgbqrI";
   let sheetData = [];
 
 $("#btnSm").click(function(){
-    if($("#txtUserid").val()==""||$("#txtCCCD").val()=="")
+    if($("#txtUserid").val()==""||$("#txtPW").val()=="")
     {
         alert("Nhập đầy đủ thông tin");
         return;
     }
 
     const inputStaff = document.getElementById("txtUserid").value.trim();
-      const inputId = document.getElementById("txtCCCD").value.trim();
+      const inputId = document.getElementById("txtPW").value.trim();
      // Lấy dữ liệu từ Google Sheet khi load trang
     fetch(url)
       .then(res => res.json())
@@ -20,7 +20,7 @@ $("#btnSm").click(function(){
       
 
       const found = sheetData.find(row =>
-        row.USERID === inputStaff && row.CCCD === inputId
+        row.USERID === inputStaff && row.PW === inputId
       );
       if (found) {
         var data="";

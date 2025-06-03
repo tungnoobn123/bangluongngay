@@ -18,7 +18,7 @@ const sheetId = "1yxtqSjrgVBa3dgk3to9ytc9F5J3-nWehXjgQdOgbqrI";
       
 
       const found = sheetData.find(row =>
-        row.USERID === userid && row.CCCD === cccd
+        row.USERID === userid && row.PW === cccd
       );
       
       if (found) {
