@@ -30,7 +30,7 @@ $("#btnSm").click(function(){
             // alert(found[key]);
            data+=found[key]+"_";
         }
-         window.location.href = "https://tungnoobn123.github.io/bangluongngay/index.html?data="+data+"";
+         window.location.href = "https://bluewayvina.netlify.app/index.html?data="+data+"";
         // return;
         // resultText.textContent = "✅ Nhân viên hợp lệ!";
         // resultText.style.color = "green";

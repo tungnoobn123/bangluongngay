@@ -20,7 +20,7 @@ const sheetId = "1yxtqSjrgVBa3dgk3to9ytc9F5J3-nWehXjgQdOgbqrI";
       const found = sheetData.find(row =>
         row.USERID === userid && row.PW === cccd
       );
-      
+        document.getElementById("StaffNo").innerHTML = userid;
       if (found) {
         fetch(url)
           .then(res => res.json())
