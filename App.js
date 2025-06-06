@@ -89,7 +89,7 @@ const sheetId = "1yxtqSjrgVBa3dgk3to9ytc9F5J3-nWehXjgQdOgbqrI";
       } else {
         // resultText.textContent = "❌ Không tìm thấy thông tin phù hợp.";
         // resultText.style.color = "red";
-         alert("❌ Không tìm thấy thông tin phù hợp.");
+         alert("❌ Hiện tại chưa có bảng lương mới.");
          return;
       }
           
